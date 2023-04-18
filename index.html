@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="tavoloDaGioco"></div>
+
+    <script>
+
+        let NcarteGirate = 0
+        let primaCartaGirata = null
+        let carte = ["pokemon-card-front.png", "GlaceonVmax.jfif", "pokemon-card-front.png", "GlaceonVmax.jfif"]
+
+        let tavolo = document.querySelector('#tavoloDaGioco')
+
+        carte.forEach(card => {
+            tavolo.innerHTML += '<img id="' + card + '" src="pokemon-card-back.png" onclick="gira(this)" />'
+            console.log('<img id="' + card + '" src="pokemon-card-back.png" />')
+        });
+
+        function gira(carta) {
+            NcarteGirate++
+            carta.src = carta.id
+            console.log(carta.src)
+            if (NcarteGirate == 1)
+                primaCartaGirata = carta
+            else {
+                NcarteGirate = 0
+                if (carta.src == primaCartaGirata.src)
+                    console.log('BRAVO +1 punto')
+                else {
+                    console.log('RIPROVACI')
+                    carta.src = "pokemon-card-back.png"
+                    primaCartaGirata.src = "pokemon-card-back.png"
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
